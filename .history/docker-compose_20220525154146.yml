@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  go:
+    build:
+      context: .
+      dockerfile: DockerFile
+    command: "go run main.go"
+    networks:
+      - back-end
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+
+  db:
+    image: mysql:8.0
+    restart: always
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_database
+      MYSQL_USER: go_test
+      MYSQL_PASSWORD: password
+    ports:
+      - 3307:3306
+  
+  networks:
+    

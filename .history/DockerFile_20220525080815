@@ -1,0 +1,15 @@
+FROM golang:latest
+
+RUN mkdir /app
+WORKDIR /app
+
+CMD ["go mod init crud", "go mod tidy"]
+
+COPY go.mod ./
+COPY go.sum ./
+
+COPY . .
+
+RUN go build
+
+CMD ["./crud"]

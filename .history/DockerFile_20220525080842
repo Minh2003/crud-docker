@@ -1,0 +1,17 @@
+FROM golang:latest
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY go.mod ./
+COPY go.sum ./
+
+RUN 
+Learn more about the "RUN " Dockerfile command.
+go mod download
+
+COPY . .
+
+RUN go build
+
+CMD ["./crud"]
